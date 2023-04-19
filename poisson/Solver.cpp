@@ -179,8 +179,8 @@ void Solver::writeRhs(const std::string &filename) const
 {
     std::ofstream fout(filename);
     fout << m_systemRhs.size() << '\n';
-    for (double t : m_systemRhs)
-        fout << t << '\n';
+    for (int i = 0; i < m_systemRhs.size(); ++i)
+        fout << m_systemRhs(i) << '\n';
     fout.close();
 }
 
@@ -201,9 +201,9 @@ void Solver::writeToVtk(const std::string &filename) const
     fout << "POINT_DATA " << m_dof << " SCALARS value float 1\n"
          << "LOOKUP_TABLE default\n";
 
-    for (double u : m_solution)
+    for (int i = 0; i < m_solution.size(); ++i)
     {
-        fout << u << '\n';
+        fout << m_solution(i) << '\n';
     }
 
     fout.close();
